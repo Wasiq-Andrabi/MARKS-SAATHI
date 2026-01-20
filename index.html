@@ -19,16 +19,21 @@
 
         body {
             font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); /* Darker, richer blue background */
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); /* Dark Blue Theme */
             color: var(--dark);
-            min-height: 100vh;
-            padding: 20px 10px;
+            
+            /* --- CENTERING FIX --- */
+            min-height: 100vh;     /* Full Screen Height */
+            display: flex;         /* Use Flexbox */
+            padding: 20px 10px;    /* Padding from edges */
+            /* Note: We don't use align-items: center here to avoid mobile clipping. 
+               We use margin: auto on the container instead. */
         }
 
         /* --- MAIN CONTAINER --- */
         .container {
-            max-width: 900px; /* Wider than before */
-            margin: 0 auto;
+            width: 100%;
+            max-width: 900px;
             background: #ffffff;
             border-radius: 20px;
             overflow: hidden;
@@ -36,6 +41,9 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            
+            /* --- VERTICAL CENTER MAGIC --- */
+            margin: auto; /* This centers it vertically & horizontally safely */
         }
 
         /* --- HERO SECTION --- */
@@ -47,7 +55,7 @@
             align-items: center;
         }
 
-        /* 1. BIG LOGO AT TOP */
+        /* LOGO */
         .logo-box {
             width: 140px;
             height: 140px;
@@ -65,7 +73,7 @@
             object-fit: cover;
         }
 
-        /* TEXT CONTENT */
+        /* TEXT */
         .tagline {
             color: var(--primary);
             font-size: 0.85rem;
@@ -91,7 +99,7 @@
             line-height: 1.6;
         }
 
-        /* 2. DYNAMIC COLORFUL BUTTON */
+        /* BUTTON */
         .btn-download {
             background: linear-gradient(45deg, #FF512F 0%, #DD2476 50%, #FF512F 100%);
             background-size: 200% auto;
@@ -116,7 +124,7 @@
             box-shadow: 0 15px 30px rgba(221, 36, 118, 0.6);
         }
 
-        /* --- FEATURES SECTION (Moved Upward) --- */
+        /* --- FEATURES SECTION --- */
         .features {
             background: #F8FAFC;
             padding: 3rem 2rem;
@@ -181,6 +189,7 @@
             .hero { padding: 2.5rem 1.5rem; }
             h1 { font-size: 2rem; }
             .btn-download { width: 100%; justify-content: center; }
+            .grid { grid-template-columns: 1fr; } /* Force 1 column on mobile for neatness */
         }
     </style>
 </head>
