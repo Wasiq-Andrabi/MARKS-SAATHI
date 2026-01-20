@@ -13,72 +13,51 @@
             --secondary: #0EA5E9;
             --dark: #1F2937;
             --light: #F3F4F6;
-            --white: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: var(--light);
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); /* Darker, richer blue background */
             color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- BACKGROUND --- */
-        /* This is the "Wallpaper" - We keep the gradient vibrant */
-        .bg-wrapper {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
             min-height: 100vh;
+            padding: 20px 10px;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 900px; /* Wider than before */
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem; /* Small padding on mobile edges */
+            flex-direction: column;
             position: relative;
         }
 
-        /* Decorative Background Circles */
-        .circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            pointer-events: none; 
-        }
-        .c1 { width: 300px; height: 300px; top: -50px; left: -50px; }
-        .c2 { width: 400px; height: 400px; bottom: -50px; right: -50px; }
-
-
-        /* --- MAIN CARD (HERO) --- */
-        .hero-card {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            width: 100%;
-            max-width: 450px; /* Default for Mobile (Vertical Strip) */
-            padding: 2.5rem 2rem;
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 3rem 2rem 2rem 2rem;
             text-align: center;
-            position: relative;
-            z-index: 10;
-            /* Animation */
-            animation: fadeIn Up 0.8s ease-out;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Logo Styling */
+        /* 1. BIG LOGO AT TOP */
         .logo-box {
-            width: 100px;
-            height: 100px;
+            width: 140px;
+            height: 140px;
             margin-bottom: 1.5rem;
             border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 4px solid var(--light);
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .logo-box img {
             width: 100%;
@@ -86,179 +65,176 @@
             object-fit: cover;
         }
 
-        /* Typography */
+        /* TEXT CONTENT */
         .tagline {
             color: var(--primary);
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
         }
 
         h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
             line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--dark);
         }
 
-        p.description {
-            font-size: 0.95rem;
+        p.lead {
+            font-size: 1.1rem;
             color: #555;
             margin-bottom: 2rem;
-            max-width: 100%;
+            max-width: 600px;
+            line-height: 1.6;
         }
 
-        /* Button */
-        .play-btn {
-            background: var(--dark);
-            color: var(--white);
-            padding: 1rem 2rem;
+        /* 2. DYNAMIC COLORFUL BUTTON */
+        .btn-download {
+            background: linear-gradient(45deg, #FF512F 0%, #DD2476 50%, #FF512F 100%);
+            background-size: 200% auto;
+            color: white;
+            padding: 18px 40px;
             border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
             text-decoration: none;
-            font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        .play-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            background: #000;
+            gap: 12px;
+            box-shadow: 0 10px 20px rgba(221, 36, 118, 0.4);
+            transition: all 0.4s ease;
+            animation: pulse-glow 2s infinite;
         }
 
-        /* --- DESKTOP TRANSFORMATION --- */
-        /* This runs ONLY on screens wider than 1024px (Laptops/Desktops) */
-        @media (min-width: 1024px) {
-            
-            .hero-card {
-                max-width: 1100px; /* Make card VERY wide */
-                flex-direction: row; /* Switch to Side-by-Side layout */
-                justify-content: space-between;
-                text-align: left; /* Align text to left */
-                padding: 4rem 5rem; /* Bigger spacing */
-                align-items: center; /* Center vertically */
-            }
-
-            /* Split the card into two zones */
-            .content-side {
-                flex: 1;
-                padding-right: 3rem;
-            }
-
-            .visual-side {
-                flex: 1;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            /* Adjust elements for desktop scale */
-            .logo-box {
-                width: 300px; /* Huge Logo on Desktop */
-                height: 300px;
-                margin-bottom: 0;
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            }
-
-            h1 {
-                font-size: 3.5rem; /* Bigger Headline */
-            }
-
-            p.description {
-                font-size: 1.1rem;
-                margin-bottom: 2.5rem;
-            }
-
-            .tagline {
-                justify-content: flex-start;
-            }
+        .btn-download:hover {
+            background-position: right center;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(221, 36, 118, 0.6);
         }
 
-        /* --- FEATURES SECTION --- */
+        /* --- FEATURES SECTION (Moved Upward) --- */
         .features {
-            padding: 4rem 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            text-align: center;
+            background: #F8FAFC;
+            padding: 3rem 2rem;
+            border-top: 1px solid #e2e8f0;
         }
-        .features h2 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 2rem; }
-        
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .features-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+        }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
-        .f-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s;
-        }
-        .f-card:hover { transform: translateY(-5px); }
-        .f-icon { font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .f-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+        }
+        .f-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        .f-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            padding: 1rem;
+            background: #F8FAFC;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* ANIMATIONS */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(221, 36, 118, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(221, 36, 118, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(221, 36, 118, 0); }
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 600px) {
+            .hero { padding: 2.5rem 1.5rem; }
+            h1 { font-size: 2rem; }
+            .btn-download { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-wrapper">
-        <div class="circle c1"></div>
-        <div class="circle c2"></div>
-
-        <div class="hero-card">
-            <div class="content-side">
-                <div class="tagline">THE PREMIER LEARNING ECOSYSTEM</div>
-                <h1>MARKS SAATHI</h1>
-                
-                <p class="description">
-                    Unlock Your Potential. Experience the next generation of education. 
-                    Comprehensive video lectures, smart notes, and professional-grade testing—all in your pocket.
-                </p>
-
-                <a href="https://play.google.com/store/apps/details?id=co.ted.ykvjf" class="play-btn">
-                    <i class="fab fa-google-play"></i> Get it on Play Store
-                </a>
+    <div class="container">
+        <div class="hero">
+            
+            <div class="logo-box">
+                <img src="https://i.postimg.cc/qqytSXck/Screenshot-2026-01-15-22-43-11-29-92460851df6f172a4592fca41cc2d2e6.jpg" alt="Marks Saathi Logo">
             </div>
 
-            <div class="visual-side">
-                <div class="logo-box">
-                    <img src="https://i.postimg.cc/qqytSXck/Screenshot-2026-01-15-22-43-11-29-92460851df6f172a4592fca41cc2d2e6.jpg" alt="Marks Saathi Logo">
+            <div class="tagline">The Premier Learning Ecosystem</div>
+            <h1>MARKS SAATHI</h1>
+            
+            <p class="lead">
+                J&K's First Complete Educational App. <br>
+                High-quality video lectures, smart notes, and professional testing—now in your pocket.
+            </p>
+
+            <a href="https://play.google.com/store/apps/details?id=co.ted.ykvjf" class="btn-download">
+                <i class="fab fa-google-play"></i>
+                <span>Get it on Play Store</span>
+            </a>
+        </div>
+
+        <section class="features">
+            <div class="features-header">
+                <h2>Why Choose Us?</h2>
+            </div>
+            
+            <div class="grid">
+                <div class="f-item">
+                    <div class="f-icon"><i class="fas fa-video"></i></div>
+                    <h3>HD Lectures</h3>
+                    <p>Crystal clear video content.</p>
+                </div>
+                <div class="f-item">
+                    <div class="f-icon"><i class="fas fa-book-reader"></i></div>
+                    <h3>Smart Notes</h3>
+                    <p>Concise study material.</p>
+                </div>
+                <div class="f-item">
+                    <div class="f-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Live Analysis</h3>
+                    <p>Track your real-time growth.</p>
                 </div>
             </div>
+        </section>
+
+        <div class="footer-note">
+            &copy; 2026 Marks Saathi. Designed for Excellence.
         </div>
     </div>
-
-    <section class="features">
-        <h2>Why Choose Marks Saathi?</h2>
-        <div class="grid">
-            <div class="f-card">
-                <div class="f-icon"><i class="fas fa-video"></i></div>
-                <h3>HD Lectures</h3>
-                <p>High-quality video content accessible anytime.</p>
-            </div>
-            <div class="f-card">
-                <div class="f-icon"><i class="fas fa-clipboard-list"></i></div>
-                <h3>Smart Notes</h3>
-                <p>Concise material for better retention.</p>
-            </div>
-            <div class="f-card">
-                <div class="f-icon"><i class="fas fa-trophy"></i></div>
-                <h3>Live Tests</h3>
-                <p>Track progress with instant analytics.</p>
-            </div>
-        </div>
-    </section>
 
 </body>
 </html>
